@@ -83,7 +83,7 @@ module.exports = function (options) {
             i18nTemplate += ['<input type="hidden" id="i18n-str-', attr, '" value="{{_(', template, ')}}">'].join('') + '\n'
         })
 
-        var jsFile = fs.readFileSync('./i18n.js')
+        var jsFile = fs.readFileSync(path.join(__dirname, 'i18n.js'))
         i18nTemplate += '<script>' + jsFile.toString() + '</script>'
 
         return i18nTemplate
