@@ -83,25 +83,8 @@ module.exports = function (options) {
             i18nTemplate += ['<input type="hidden" id="i18n-str-', attr, '" value="{{_(', template, ')}}">'].join('') + '\n'
         })
 
-        i18nTemplate += [
-            '<script>',
-            'if(!window.i18n){',
-            '   window.i18n = function (name) {',
-            '       var input = document.getElementById(\'i18n-str-\' + name)',
-            '       if (!input) { return replaceString(name, arguments) }',
-            '       var value = input.value',
-            '       function replaceString(text, array) {',
-            '           var i = 0',
-            '           while(text.indexOf(\'%s\') >= 0) {',
-            '               text = text.replace(\'%s\', array[++i])',
-            '           }',
-            '           return text',
-            '       }',
-            '       return replaceString(value, arguments)',
-            '   }',
-            '}',
-            '</script>'
-        ].join('\n')
+        var jsFile = fs.readFileSync('./i18n.js')
+        i18nTemplate += '<script>' + jsFile.toString() + '</script>'
 
         return i18nTemplate
     }
