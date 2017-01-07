@@ -10,6 +10,7 @@ if(!window.i18n) {
            var i = 0
            while(text.indexOf('%s') >= 0) {
                text = text.replace('%s', array[i])
+               i++
            }
            return text
        }
